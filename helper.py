@@ -135,17 +135,7 @@ def divide_signal(df, segment_length):
     return df_output
 
 
-def normalize_signal(df):
-    '''
-    Normalize the signals in the DataFrame returned by matfile_to_df() by subtracting
-    the mean and dividing by the standard deviation.
-    '''
-    mean = df['DE_time'].apply(np.mean)
-    std = df['DE_time'].apply(np.std)
-    df['DE_time'] = (df['DE_time'] - mean) / std
-
-
-def get_df_all(data_path, segment_length=512, normalize=False):
+def get_df_all(data_path, segment_length=512):
     '''
     Load, preprocess and return a DataFrame which contains all signals data and
     labels and is ready to be used for model training.
@@ -165,8 +155,6 @@ def get_df_all(data_path, segment_length=512, normalize=False):
     '''
     df = matfile_to_df(data_path)
 
-    if normalize:
-        normalize_signal(df)
     df_processed = divide_signal(df, segment_length)
 
     map_label = {'N':0, 'B':1, 'IR':2, 'OR':3}
