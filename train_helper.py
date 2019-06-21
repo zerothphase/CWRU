@@ -128,7 +128,7 @@ def fit(epochs, model, loss_func, opt, train_dl, valid_dl, one_cycle=None, train
             xb, yb = xb.to(device), yb.to(device)
             loss, batch_size, pred = loss_batch(model, loss_func, xb, yb, opt)
             if train_metric == False:
-                train_loss += loss
+                train_loss += loss*batch_size
                 num_examples += batch_size
             
             if one_cycle:
