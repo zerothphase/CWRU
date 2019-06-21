@@ -9,7 +9,6 @@ from torch.nn.modules.loss import CrossEntropyLoss
 from sklearn.metrics import accuracy_score
 import numpy as np
 import pandas as pd
-from one_cycle import OneCycle, update_lr, update_mom
 
 
 # Functions for training
@@ -68,7 +67,7 @@ def loss_batch(model, loss_func, xb, yb, opt=None):
 
     return loss.item(), len(xb), pred
 
-def fit(epochs, model, loss_func, opt, train_dl, valid_dl, one_cycle=None, train_metric=False):
+def fit(epochs, model, loss_func, opt, train_dl, valid_dl, train_metric=False):
     '''
         Train the NN model and return the model at the final step.
         Lists of the training and validation losses at each epochs are also 
@@ -87,10 +86,6 @@ def fit(epochs, model, loss_func, opt, train_dl, valid_dl, one_cycle=None, train
                 Dataloader of the training set.
             valid_dl: DataLoader
                 Dataloader of the validation set.
-            one_cycle: OneCycle
-                See one_cycle.py. Object to calculate and update the learning 
-                rates and momentums at the end of each training iteration (not 
-                epoch) based on the one cycle policy.
             train_metric: Bool
                 Default is False. If False, the train loss and accuracy will be
                 set to 0.
@@ -130,11 +125,6 @@ def fit(epochs, model, loss_func, opt, train_dl, valid_dl, one_cycle=None, train
             if train_metric == False:
                 train_loss += loss*batch_size
                 num_examples += batch_size
-            
-            if one_cycle:
-                lr, mom = one_cycle.calc()
-                update_lr(opt, lr)
-                update_mom(opt, mom)
 
         # Validate
         model.eval()
