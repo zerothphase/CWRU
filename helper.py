@@ -1,6 +1,6 @@
 # Helper functions to read and preprocess data files from Matlab format
 # Data science libraries
-import scipy
+import scipy.io
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -27,7 +27,7 @@ def matfile_to_dic(folder_path):
     for _, filepath in enumerate(folder_path.glob('*.mat')):
         # strip the folder path and get the filename only.
         key_name = str(filepath).split('\\')[-1]
-        output_dic[key_name] = scipy.io.loadmat(filepath)
+        output_dic[key_name] = scipy.io.loadmat(filepath, squeeze_me=True)
     return output_dic
 
 
@@ -129,7 +129,7 @@ def divide_signal(df, segment_length):
     df_tmp = pd.DataFrame.from_dict(dic,orient='index')
     df_output = pd.concat(
         [df_tmp[['label', 'filename']], 
-         pd.DataFrame(np.hstack(df_tmp["signal"].values).T)
+         pd.DataFrame(np.vstack(df_tmp["signal"].values))
         ], 
         axis=1 )
     return df_output
