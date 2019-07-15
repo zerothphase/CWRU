@@ -78,23 +78,28 @@ def label(filename):
         return 'N'
 
 
-def matfile_to_df(folder_path):
+def matfile_to_df(folder_path, drop=None):
     '''
     Read all the matlab files in the folder, preprocess, and return a DataFrame
     
     Parameter:
         folder_path: 
             Path (Path object) of the folder which contains the matlab files.
+        drop:
+            List of column names to be dropped. 
+            Default =  ['BA_time', 'FE_time', 'RPM', 'ans', 'i']
     Return:
         DataFrame with preprocessed data
     '''
+    if drop == None:
+        drop = ['BA_time', 'FE_time', 'RPM', 'ans', 'i']
     dic = matfile_to_dic(folder_path)
     remove_dic_items(dic)
     rename_keys(dic)
     df = pd.DataFrame.from_dict(dic).T
     df = df.reset_index().rename(mapper={'index':'filename'},axis=1)
     df['label'] = df['filename'].apply(label)
-    return df.drop(['BA_time','FE_time', 'RPM', 'ans'], axis=1, errors='ignore')
+    return df.drop(drop, axis=1, errors='ignore')
 
 
 def divide_signal(df, segment_length):
