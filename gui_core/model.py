@@ -113,7 +113,7 @@ def mat_to_ndarray(matfile_path):
 
 def preprocess_signal(array, segment_length):
     """
-    Preprocess the raw signal data by normalizing and divide the signal into
+    Preprocess the raw signal by dividing the signal into
     smaller segments with size of segment_length. Segment length must be the 
     same as the value used in training.
     
@@ -121,14 +121,7 @@ def preprocess_signal(array, segment_length):
         array: array
         segment_length: int
     """
-    array = normalize_signal_array(array)
     return divide_signal_array(array, segment_length)
-
-def normalize_signal_array(array):
-    """ Normalize the signal array"""
-    mean = np.mean(array)
-    std = np.std(array)
-    return (array - mean) / std
 
 def divide_signal_array(array, segment_length):
     '''
