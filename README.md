@@ -32,4 +32,4 @@ In this repo, simple two layers and 3 layers 1D CNN are experimented and achieve
 
 Helper functions for data cleaning and preprocessing are written in the `helper.py` module, whereas helper functions for training using Pytorch Framework are written in the `train_helper.py` module.
 
-The notebook `CWRU_Dataset.ipynb` shows the training process and the trained model is saved in the `./Model` folder.
+The notebook [`CWRU_Dataset.ipynb`](https://nbviewer.jupyter.org/github/zerothphase/CWRU/blob/master/CWRU_Dataset.ipynb) shows the training process and the trained model is saved in the `./Model` folder.
