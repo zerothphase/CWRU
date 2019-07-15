@@ -1,20 +1,24 @@
-# CWRU Bearing Dataset
+# Classification of Bearing Faults
 ## Introduction
-This dataset is commonly used as benchmark for bearing fault classification algorithm 
-[(Link)](https://csegroups.case.edu/bearingdatacenter/home), which contains vibration signal data of normal and fault bearings. 
-Vibration signals of 4 classes of bearings were measured in the experiment, namely:
+Bearing is one of the most widely used machine element in rotating machines. The figure below shows a typical rolling element bearing, which consists of the cage, ball, inner race and outer race.
+
+![Bearing](https://github.com/zerothphase/CWRU/blob/master/Figures/Bearing.PNG)
+Image from: [link](https://arxiv.org/abs/1901.08247)
+
+Failure of bearing can cause serious breakdown of a machine. Therefore, bearing fault detection and classificaiton has been one of the important research area in engineering. The bearing dataset from the [Case Western Reserve University (CWRU) Bearing Data Center](https://csegroups.case.edu/bearingdatacenter/home) is commonly used as the benchmark for bearing fault classification algorithm, which contains **vibration signal data** of normal and faulty bearings. 
+Vibration signals of 4 classes of bearings are available in this dataset, namely:
 - normal bearing without fault (N)
-- bearing with single point fault at the inner raceway (IR)
-- bearing with single point fault at the outer raceway (OR)
-- bearing with single point fault at the ball (B). 
+- bearing with single point defect at the inner raceway (IR)
+- bearing with single point defect at the outer raceway (OR)
+- bearing with single point defect at the ball (B). 
 
-The faults of different diameters (0.007 ~ 0.028 Inches) are manufactured to the bearings artificially.
+Single point defects of different diameters (0.007 ~ 0.028 Inches) are manufactured to the bearings artificially.
 
-In the experiment, vibration signal data was recorded using accelerometers at the drive 
-end (DE) and fan end (FE) and the data is stored as Matlab files. The sampling rate is 12 kHz and each Matlab file contains 
-between ~120k to ~240k sample points. For more information please refer to the 
-[website](https://csegroups.case.edu/bearingdatacenter/home). 
+In this dataset, vibration signal data of normal bearing, bearing with drive end (DE) and fan end (FE) bearing defects was collected at a sampling rate of 12 kHz using accelerometers. The collected data is stored as Matlab files and each Matlab file contains 
+between ~120k to ~240k sample points. Besides that, vibration signals of drive end bearing defect are also collected at 48 kHz. The figures below show one example of each class.
 
+<img src="https://github.com/zerothphase/CWRU/blob/master/Figures/signal_N.png" width="400"> <img src="https://github.com/zerothphase/CWRU/blob/master/Figures/signal_B.png" width="400"> 
+<img src="https://github.com/zerothphase/CWRU/blob/master/Figures/signal_IR.png" width="400"> <img src="https://github.com/zerothphase/CWRU/blob/master/Figures/signal_OR.png" width="400">
 
 ## Overview
 1D CNN has been sucessfully applied to fault classification based on signal data in some papers 
